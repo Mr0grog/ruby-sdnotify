@@ -91,7 +91,7 @@ module SdNotify
   # @note Unlike sd_watchdog_enabled(3), this returns seconds, not microseconds.
   def self.watchdog_interval
     wd_usec = Integer(ENV["WATCHDOG_USEC"])
-    wd_usec.positive? ? wd_usec / 1e6 : 0.0
+    wd_usec > 0 ? wd_usec / 1e6 : 0.0
   rescue StandardError
     0.0
   end
