@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.files       = ["lib/sd_notify.rb", "LICENSE", "README.md", "CHANGELOG.md"]
   s.homepage    = "https://github.com/agis/ruby-sdnotify"
   s.license     = "MIT"
+  s.required_ruby_version = ">= 2.3.0"
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "rubocop"
