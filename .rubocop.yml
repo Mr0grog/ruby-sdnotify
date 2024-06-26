@@ -2,7 +2,7 @@ require:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.2
 
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
