@@ -55,7 +55,7 @@ class SdNotifyTest < Minitest::Test
   def test_sd_notify_watchdog_interval_disabled
     setup_socket
 
-    assert_equal(0.0, SdNotify.watchdog_interval)
+    assert_nil(SdNotify.watchdog_interval)
   end
 
   def test_sd_notify_watchdog_interval_enabled

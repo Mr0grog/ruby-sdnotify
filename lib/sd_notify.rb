@@ -73,7 +73,7 @@ module SdNotify
   # @note Unlike sd_watchdog_enabled(3), this method does not mutate the
   #   environment.
   def self.watchdog?
-    return false if watchdog_interval == 0.0
+    return false unless watchdog_interval
 
     wd_pid = ENV["WATCHDOG_PID"]
     return true if !wd_pid || wd_pid == $$.to_s
@@ -83,17 +83,18 @@ module SdNotify
 
   # Get the expected number of seconds between watchdog notifications. If
   # systemd's watchdog manager is enabled, it will take action if it does not
-  # receive notifications at least this often from your program.
+  # receive notifications at least this often from your program. Returns +nil+
+  # if no watchdog interval is set.
   #
-  # @return [Float] the frequency (in seconds) at which the service manager
-  #   expects watchdog keep-alive notification messages from this process.
+  # @return [Float, nil] The frequency (in seconds) at which the service
+  #   manager expects watchdog keep-alive notification messages from this
+  #   process.
   #
-  # @note Unlike sd_watchdog_enabled(3), this returns seconds, not microseconds.
+  # @note Unlike +sd_watchdog_enabled(3)+, this returns seconds, not
+  #   microseconds.
   def self.watchdog_interval
-    wd_usec = Integer(ENV["WATCHDOG_USEC"])
-    wd_usec > 0 ? wd_usec / 1e6 : 0.0
-  rescue StandardError
-    0.0
+    wd_usec = Integer(ENV["WATCHDOG_USEC"]) rescue 0
+    wd_usec > 0 ? wd_usec / 1e6 : nil
   end
 
   # Notify systemd with the provided state, via the notification socket, if
