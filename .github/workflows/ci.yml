@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - just-for-grins
 
   pull_request:
 
@@ -26,7 +27,7 @@ jobs:
       - name: Install compatible Minitest
         run: bundle add minitest --version 5.0.8
       - name: Run tests
-        run: ruby -Ilib:test test/*
+        run: bundle exec ruby -Ilib:test test/*
 
   build:
     runs-on: ubuntu-latest
