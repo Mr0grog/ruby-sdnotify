@@ -94,6 +94,7 @@ watchdog_thread = if SdNotify.watchdog?
         SdNotify.watchdog
       else
         break
+      end
     end
   end
 end
