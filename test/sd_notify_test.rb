@@ -33,7 +33,7 @@ class SdNotifyTest < Minitest::Test
   def test_sd_notify_watchdog_disabled
     setup_socket
 
-    assert_equal(false, SdNotify.watchdog?)
+    refute(SdNotify.watchdog?)
   end
 
   def test_sd_notify_watchdog_enabled
@@ -41,7 +41,7 @@ class SdNotifyTest < Minitest::Test
     ENV["WATCHDOG_PID"] = $$.to_s
     setup_socket
 
-    assert_equal(true, SdNotify.watchdog?)
+    assert(SdNotify.watchdog?)
   end
 
   def test_sd_notify_watchdog_enabled_for_a_different_process
@@ -49,7 +49,7 @@ class SdNotifyTest < Minitest::Test
     ENV["WATCHDOG_PID"] = ($$ + 1).to_s
     setup_socket
 
-    assert_equal(false, SdNotify.watchdog?)
+    refute(SdNotify.watchdog?)
   end
 
   def test_sd_notify_watchdog_interval_disabled
